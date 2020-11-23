@@ -1,20 +1,51 @@
-const gallery = document.querySelector('gallery js-gallery')
+import galleryImg from './gallery-items.js'
 
-function createGalleryItem(obj) {
-    const galleryListItem = document.createElement('li')
+const gallery = document.querySelector('.js-gallery')
+
+function createGalleryItem({ preview, original, description }) {
+
+    const galleryListItem = document.createElement('li');
     galleryListItem.classList.add("gallery__item");
-    galleryListItem.setAttribute('href', 'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg');
-    gallery.appendChild(galleryListItem);
+
+    const galleryLink = document.createElement('a');
+    galleryLink.setAttribute('href', (original));
+    galleryLink.classList.add('gallery__link');
+    galleryListItem.appendChild(galleryLink);
 
     const galleryImage = document.createElement('img');
     galleryImage.classList.add("gallery__image");
-    galleryImage.setAttribute('src', 'data-source', 'alt');
-    gallery.appendChild(galleryImage);
+    galleryImage.src = (preview);
+    galleryImage.alt = (description);
+    galleryImage.dataset.source = original;
+    galleryLink.appendChild(galleryImage);
+
+    return galleryListItem
 }
 
-createGalleryItem()
-console.log(createGalleryItem)
+const arr = galleryImg.map(createGalleryItem);
+// console.log(arr)
 
+gallery.append(...arr);
 
+gallery.addEventListener('click', onClick);
+const lightbox = document.querySelector('.js-lightbox')
+function onClick(evt) {
 
+    evt.preventDefault();
+    console.log(evt.target.dataset.source)
 
+    if (evt.target.nodeName !== 'IMG') {
+        return
+    } lightbox.classList.add('is-open');
+    // lightboxImage.src = evt.target
+
+}
+
+const closeButton = document.querySelector('.lightbox__button');
+closeButton.addEventListener('click', closeClick);
+
+function closeClick(close) {
+    lightbox.classList.remove('is-open')
+}
+
+const lightboxImage = document.querySelector('.lightbox__image');

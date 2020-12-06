@@ -37,8 +37,6 @@ function onClick(evt) {
     if (evt.target.nodeName !== 'IMG') {
         return
     } lightbox.classList.add('is-open');
-    // lightboxImage.src = evt.target
-
 }
 
 const closeButton = document.querySelector('.lightbox__button');
@@ -49,3 +47,7 @@ function closeClick(close) {
 }
 
 const lightboxImage = document.querySelector('.lightbox__image');
+//
+if (lightbox.classList.contains('is-open')) {
+    lightboxImage.src = galleryImg.original;
+} 

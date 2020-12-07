@@ -43,11 +43,12 @@ const closeButton = document.querySelector('.lightbox__button');
 closeButton.addEventListener('click', closeClick);
 
 function closeClick(close) {
-    lightbox.classList.remove('is-open')
+    lightbox.classList.remove('is-open');
+    lightboxImage.src = '';
 }
 
 const lightboxImage = document.querySelector('.lightbox__image');
-//
+
 if (lightbox.classList.contains('is-open')) {
-    lightboxImage.src = galleryImg.original;
-} 
+    lightboxImage.src = (arr.original);
+}
